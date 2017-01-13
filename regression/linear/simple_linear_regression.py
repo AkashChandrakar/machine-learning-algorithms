@@ -24,3 +24,30 @@ def simple_linear_regression(input_feature, output):
     intercept = sum_output / n - slope * sum_input_feature / n
     
     return (intercept, slope)
+    
+
+
+def get_regression_predictions(input_feature, intercept, slope):
+    # calculate the predicted values:
+    predicted_values = intercept + slope*input_feature
+    return predicted_values
+    
+    
+
+def get_residual_sum_of_squares(input_feature, output, intercept, slope):
+    # First get the predictions
+    predicted_values = get_regression_predictions(input_feature,intercept,slope)
+    # then compute the residuals (since we are squaring it doesn't matter which order you subtract)
+    residuals = output - predicted_values
+    # square the residuals and add them up
+    residuals_square = residuals * residuals
+    RSS = residuals_square.sum()
+    return(RSS)
+    
+
+
+def inverse_regression_predictions(output, intercept, slope):
+    # solve output = intercept + slope*input_feature for input_feature. Use this equation to compute the inverse predictions:
+    estimated_feature = (output - intercept) / slope
+    return estimated_feature
+
